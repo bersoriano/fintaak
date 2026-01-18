@@ -79,7 +79,7 @@ export const components: PortableTextComponents = {
         </figure>
       )
     },
-    code: ({ value }) => {
+    codeBlock: ({ value }) => {
       return (
         <div className="my-8">
           {value.filename && (
@@ -87,7 +87,7 @@ export const components: PortableTextComponents = {
               {value.filename}
             </div>
           )}
-          <pre className="bg-gray-900 text-gray-100 p-4 rounded-b-lg overflow-x-auto">
+          <pre className={`bg-gray-900 text-gray-100 p-4 ${value.filename ? 'rounded-b-lg' : 'rounded-lg'} overflow-x-auto`}>
             <code className={`language-${value.language || 'text'}`}>{value.code}</code>
           </pre>
         </div>
