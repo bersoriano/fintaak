@@ -9,7 +9,7 @@ export default function Footer() {
       { label: "Seguridad", href: "#seguridad" },
     ],
     recursos: [
-      { label: "Blog", href: "#blog" },
+      { label: "Blog", href: "/blog" },
       { label: "Centro de Ayuda", href: "#ayuda" },
       { label: "Guías Educativas", href: "#guias" },
       { label: "Preguntas Frecuentes", href: "#faq" },

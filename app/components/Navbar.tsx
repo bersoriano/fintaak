@@ -9,7 +9,7 @@ export default function Navbar() {
   const navItems = [
     { label: "Cómo Funciona", href: "#como-funciona" },
     { label: "Calculadora", href: "#calculadora" },
-    { label: "Blog", href: "#blog" },
+    { label: "Blog", href: "/blog" },
     { label: "Nuestra Misión", href: "#mision" },
   ];
 
