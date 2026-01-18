@@ -12,10 +12,11 @@ import { components } from '@/app/components/PortableTextComponents'
 
 export const dynamic = 'force-dynamic'
 
-export async function generateMetadata({ params }: { params: { slug: string } }) {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
   const post = await sanityFetch<BlogPost>({
     query: postBySlugQuery,
-    params: { slug: params.slug },
+    params: { slug },
   })
 
   if (!post) return {}
@@ -33,12 +34,13 @@ const categoryLabels: Record<string, string> = {
   consejos: 'Consejos',
 }
 
-export default async function BlogPostPage({ params }: { params: { slug: string } }) {
+export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
   const [post, recentPosts] = await Promise.all([
     sanityFetch<BlogPost>({
       query: postBySlugQuery,
-      params: { slug: params.slug },
-      tags: [`post:${params.slug}`],
+      params: { slug },
+      tags: [`post:${slug}`],
     }),
     sanityFetch<BlogPostCard[]>({
       query: recentPostsQuery,
