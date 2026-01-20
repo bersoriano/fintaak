@@ -87,11 +87,11 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         </header>
 
         {/* Featured Image */}
-        {post.featuredImage && (
+        {post.featuredImage?.asset && (
           <div className="relative w-full h-96 mb-12">
             <Image
               src={urlFor(post.featuredImage).width(1200).height(600).url()}
-              alt={post.featuredImage.alt}
+              alt={post.featuredImage.alt || post.title}
               fill
               className="object-cover"
               priority
@@ -126,12 +126,12 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                     key={recentPost._id}
                     className="bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-lg transition-shadow"
                   >
-                    {recentPost.featuredImage && (
+                    {recentPost.featuredImage?.asset && (
                       <Link href={`/blog/${recentPost.slug.current}`}>
                         <div className="relative h-40 w-full">
                           <Image
                             src={urlFor(recentPost.featuredImage).width(400).height(300).url()}
-                            alt={recentPost.featuredImage.alt}
+                            alt={recentPost.featuredImage.alt || recentPost.title}
                             fill
                             className="object-cover"
                           />

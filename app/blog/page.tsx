@@ -63,12 +63,12 @@ export default async function BlogPage() {
                   className="bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-lg transition-shadow duration-300"
                 >
                   {/* Featured Image */}
-                  {post.featuredImage && (
+                  {post.featuredImage?.asset && (
                     <Link href={`/blog/${post.slug.current}`}>
                       <div className="relative h-48 w-full overflow-hidden">
                         <Image
                           src={urlFor(post.featuredImage).width(600).height(400).url()}
-                          alt={post.featuredImage.alt}
+                          alt={post.featuredImage.alt || post.title}
                           fill
                           className="object-cover hover:scale-105 transition-transform duration-300"
                         />
