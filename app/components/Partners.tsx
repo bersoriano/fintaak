@@ -6,7 +6,7 @@ export default function Partners() {
           <p className="text-sm font-medium text-gray-500 uppercase tracking-wide mb-4">
             Confianza y Seguridad
           </p>
-          <h3 className="text-lg text-[--charcoal] max-w-2xl mx-auto">
+          <h3 className="text-lg text-[#2D3142] max-w-2xl mx-auto">
             Tu dinero está protegido por los más altos estándares de seguridad financiera
           </h3>
         </div>
@@ -26,19 +26,19 @@ export default function Partners() {
         {/* Trust indicators */}
         <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl mx-auto">
           <div className="text-center">
-            <div className="text-2xl font-bold text-[--trust-blue] mb-1" style={{ fontFamily: 'var(--font-poppins)' }}>
+            <div className="text-2xl font-bold text-[#1565C0] mb-1" style={{ fontFamily: 'var(--font-poppins)' }}>
               🔒
             </div>
             <p className="text-sm text-gray-600">Encriptación de nivel bancario</p>
           </div>
           <div className="text-center">
-            <div className="text-2xl font-bold text-[--trust-blue] mb-1" style={{ fontFamily: 'var(--font-poppins)' }}>
+            <div className="text-2xl font-bold text-[#1565C0] mb-1" style={{ fontFamily: 'var(--font-poppins)' }}>
               ✓
             </div>
             <p className="text-sm text-gray-600">Cumplimiento regulatorio completo</p>
           </div>
           <div className="text-center">
-            <div className="text-2xl font-bold text-[--trust-blue] mb-1" style={{ fontFamily: 'var(--font-poppins)' }}>
+            <div className="text-2xl font-bold text-[#1565C0] mb-1" style={{ fontFamily: 'var(--font-poppins)' }}>
               🛡️
             </div>
             <p className="text-sm text-gray-600">Protección contra fraudes 24/7</p>

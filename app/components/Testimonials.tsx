@@ -31,7 +31,7 @@ export default function Testimonials() {
         {/* Section Header */}
         <div className="text-center mb-12">
           <h2
-            className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-[--charcoal] mb-4"
+            className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#2D3142] mb-4"
             style={{ fontFamily: 'var(--font-poppins)' }}
           >
             Lo Que Dicen Nuestros Usuarios
@@ -82,12 +82,12 @@ export default function Testimonials() {
 
               {/* Author */}
               <div className="flex items-center gap-4 pt-4 border-t border-gray-200">
-                <div className="w-12 h-12 bg-[--trust-blue] rounded-full flex items-center justify-center text-white font-semibold">
+                <div className="w-12 h-12 bg-[#1565C0] rounded-full flex items-center justify-center text-white font-semibold">
                   {testimonial.name.charAt(0)}
                 </div>
                 <div>
                   <div 
-                    className="font-semibold text-[--charcoal]"
+                    className="font-semibold text-[#2D3142]"
                     style={{ fontFamily: 'var(--font-poppins)' }}
                   >
                     {testimonial.name}
@@ -103,7 +103,7 @@ export default function Testimonials() {
         <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
           <div className="text-center">
             <div 
-              className="text-4xl font-bold text-[--trust-blue] mb-2"
+              className="text-4xl font-bold text-[#1565C0] mb-2"
               style={{ fontFamily: 'var(--font-poppins)' }}
             >
               10K+
@@ -112,7 +112,7 @@ export default function Testimonials() {
           </div>
           <div className="text-center">
             <div 
-              className="text-4xl font-bold text-[--trust-blue] mb-2"
+              className="text-4xl font-bold text-[#1565C0] mb-2"
               style={{ fontFamily: 'var(--font-poppins)' }}
             >
               $5M+
@@ -121,7 +121,7 @@ export default function Testimonials() {
           </div>
           <div className="text-center">
             <div 
-              className="text-4xl font-bold text-[--trust-blue] mb-2"
+              className="text-4xl font-bold text-[#1565C0] mb-2"
               style={{ fontFamily: 'var(--font-poppins)' }}
             >
               4.9/5
@@ -130,7 +130,7 @@ export default function Testimonials() {
           </div>
           <div className="text-center">
             <div 
-              className="text-4xl font-bold text-[--trust-blue] mb-2"
+              className="text-4xl font-bold text-[#1565C0] mb-2"
               style={{ fontFamily: 'var(--font-poppins)' }}
             >
               99.9%

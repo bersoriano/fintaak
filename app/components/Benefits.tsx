@@ -47,7 +47,7 @@ export default function Benefits() {
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2
-            className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-[--charcoal] mb-4"
+            className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#2D3142] mb-4"
             style={{ fontFamily: 'var(--font-poppins)' }}
           >
             ¿Por Qué Elegir Fintaak?
@@ -77,12 +77,12 @@ export default function Benefits() {
                 className="bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-shadow duration-300"
               >
                 <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-12 h-12 bg-[--trust-blue] bg-opacity-10 rounded-lg flex items-center justify-center text-[--trust-blue]">
+                  <div className="flex-shrink-0 w-12 h-12 bg-[#1565C0] bg-opacity-10 rounded-lg flex items-center justify-center text-[#1565C0]">
                     {benefit.icon}
                   </div>
                   <div className="flex-1">
                     <h3
-                      className="text-xl font-semibold text-[--charcoal] mb-3"
+                      className="text-xl font-semibold text-[#2D3142] mb-3"
                       style={{ fontFamily: 'var(--font-poppins)' }}
                     >
                       {benefit.title}

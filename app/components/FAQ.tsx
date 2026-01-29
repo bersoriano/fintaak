@@ -46,7 +46,7 @@ export default function FAQ() {
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 
-            className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-[--charcoal] mb-4"
+            className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#2D3142] mb-4"
             style={{ fontFamily: 'var(--font-poppins)' }}
           >
             Preguntas Frecuentes
@@ -71,13 +71,13 @@ export default function FAQ() {
                 id={`faq-question-${index}`}
               >
                 <span
-                  className="font-semibold text-[--charcoal] pr-4"
+                  className="font-semibold text-[#2D3142] pr-4"
                   style={{ fontFamily: 'var(--font-poppins)' }}
                 >
                   {faq.question}
                 </span>
                 <svg
-                  className={`w-5 h-5 text-[--trust-blue] flex-shrink-0 transition-transform ${
+                  className={`w-5 h-5 text-[#1565C0] flex-shrink-0 transition-transform ${
                     openIndex === index ? 'transform rotate-180' : ''
                   }`}
                   fill="none"
@@ -110,7 +110,7 @@ export default function FAQ() {
         {/* Contact CTA */}
         <div className="mt-12 text-center bg-blue-50 rounded-2xl p-8">
           <h3 
-            className="text-xl font-semibold text-[--charcoal] mb-2"
+            className="text-xl font-semibold text-[#2D3142] mb-2"
             style={{ fontFamily: 'var(--font-poppins)' }}
           >
             ¿Tienes más preguntas?
@@ -120,7 +120,7 @@ export default function FAQ() {
           </p>
           <a
             href="#contact"
-            className="inline-flex items-center justify-center bg-[--trust-blue] text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold min-h-[44px]"
+            className="inline-flex items-center justify-center bg-[#1565C0] text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold min-h-[44px]"
           >
             Contáctanos
           </a>

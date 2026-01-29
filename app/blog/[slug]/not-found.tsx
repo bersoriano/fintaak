@@ -25,7 +25,7 @@ export default function NotFound() {
           </p>
           <Link
             href="/blog"
-            className="bg-[--trust-blue] text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors inline-block"
+            className="bg-[#1565C0] text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors inline-block"
           >
             Volver al Blog
           </Link>

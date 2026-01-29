@@ -43,7 +43,7 @@ export default function Navbar() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center">
-            <span className="text-2xl font-bold text-[--trust-blue]" style={{ fontFamily: 'var(--font-poppins)' }}>
+            <span className="text-2xl font-bold text-[#1565C0]" style={{ fontFamily: 'var(--font-poppins)' }}>
               Fintaak
             </span>
           </Link>
@@ -54,14 +54,14 @@ export default function Navbar() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-[--charcoal] hover:text-[--trust-blue] transition-colors text-sm font-medium"
+                className="text-[#2D3142] hover:text-[#1565C0] transition-colors text-sm font-medium"
               >
                 {item.label}
               </Link>
             ))}
             <Link
               href="#newsletter"
-              className="bg-[--trust-blue] text-white px-6 py-2.5 rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium min-h-[44px] min-w-[44px] flex items-center justify-center"
+              className="bg-[#1565C0] text-white px-6 py-2.5 rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium min-h-[44px] min-w-[44px] flex items-center justify-center"
             >
               Únete al Newsletter
             </Link>
@@ -71,13 +71,13 @@ export default function Navbar() {
           <div className="flex items-center gap-2 md:hidden">
             <Link
               href="#newsletter"
-              className="bg-[--trust-blue] text-white px-4 py-2.5 rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium min-h-[44px] min-w-[44px] flex items-center justify-center"
+              className="bg-[#1565C0] text-white px-4 py-2.5 rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium min-h-[44px] min-w-[44px] flex items-center justify-center"
             >
               Newsletter
             </Link>
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-[--charcoal] p-2 min-h-[44px] min-w-[44px]"
+              className="text-[#2D3142] p-2 min-h-[44px] min-w-[44px]"
               aria-label="Toggle menu"
             >
               <svg
@@ -111,7 +111,7 @@ export default function Navbar() {
             <Link
               key={item.href}
               href={item.href}
-              className="block px-3 py-3 text-base font-medium text-[--charcoal] hover:text-[--trust-blue] hover:bg-gray-50 rounded-md min-h-[44px] transition-colors"
+              className="block px-3 py-3 text-base font-medium text-[#2D3142] hover:text-[#1565C0] hover:bg-gray-50 rounded-md min-h-[44px] transition-colors"
               onClick={() => setIsMenuOpen(false)}
             >
               {item.label}

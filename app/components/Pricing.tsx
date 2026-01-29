@@ -49,7 +49,7 @@ export default function Pricing() {
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 
-            className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-[--charcoal] mb-4"
+            className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#2D3142] mb-4"
             style={{ fontFamily: 'var(--font-poppins)' }}
           >
             Planes Transparentes
@@ -72,7 +72,7 @@ export default function Pricing() {
             >
               {plan.popular && (
                 <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                  <span className="bg-[--trust-blue] text-white px-4 py-1 rounded-full text-sm font-semibold">
+                  <span className="bg-[#1565C0] text-white px-4 py-1 rounded-full text-sm font-semibold">
                     Más Popular
                   </span>
                 </div>
@@ -80,7 +80,7 @@ export default function Pricing() {
 
               <div className="text-center mb-6">
                 <h3
-                  className="text-2xl font-semibold text-[--charcoal] mb-2"
+                  className="text-2xl font-semibold text-[#2D3142] mb-2"
                   style={{ fontFamily: 'var(--font-poppins)' }}
                 >
                   {plan.name}
@@ -91,7 +91,7 @@ export default function Pricing() {
                     <span className="text-gray-500 text-lg">$</span>
                   )}
                   <span
-                    className="text-5xl font-bold text-[--charcoal]"
+                    className="text-5xl font-bold text-[#2D3142]"
                     style={{ fontFamily: 'var(--font-poppins)' }}
                   >
                     {plan.price}
@@ -106,7 +106,7 @@ export default function Pricing() {
                 {plan.features.map((feature, idx) => (
                   <li key={idx} className="flex items-start gap-3">
                     <svg
-                      className="w-5 h-5 text-[--empowerment-green] flex-shrink-0 mt-0.5"
+                      className="w-5 h-5 text-[#2E7D32] flex-shrink-0 mt-0.5"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -126,8 +126,8 @@ export default function Pricing() {
               <button
                 className={`w-full py-3 rounded-lg font-semibold transition-colors min-h-[44px] ${
                   plan.popular
-                    ? 'bg-[--trust-blue] text-white hover:bg-blue-700'
-                    : 'bg-gray-100 text-[--charcoal] hover:bg-gray-200'
+                    ? 'bg-[#1565C0] text-white hover:bg-blue-700'
+                    : 'bg-gray-100 text-[#2D3142] hover:bg-gray-200'
                 }`}
               >
                 {plan.cta}
@@ -140,7 +140,7 @@ export default function Pricing() {
         <div className="mt-12 text-center">
           <p className="text-sm text-gray-500">
             Todos los planes incluyen nuestro compromiso de transparencia total. 
-            <a href="#" className="text-[--trust-blue] hover:underline ml-1">
+            <a href="#" className="text-[#1565C0] hover:underline ml-1">
               Comparar planes en detalle →
             </a>
           </p>

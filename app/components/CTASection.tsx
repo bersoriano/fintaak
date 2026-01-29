@@ -67,8 +67,8 @@ export default function CTASection() {
                   }}
                   placeholder="tu@email.com"
                   disabled={isLoading}
-                  className={`w-full px-6 py-4 rounded-lg text-[--charcoal] text-base focus:outline-none focus:ring-2 focus:ring-white min-h-[44px] transition-all ${
-                    error ? "ring-2 ring-red-300" : ""
+                  className={`w-full px-6 py-4 rounded-lg text-[#2D3142] text-base bg-white border-2 focus:outline-none focus:ring-2 focus:ring-white min-h-[44px] transition-all ${
+                    error ? "border-red-300 ring-2 ring-red-300" : "border-white/30"
                   } ${isLoading ? "opacity-50 cursor-not-allowed" : ""}`}
                   aria-label="Email address"
                   aria-invalid={!!error}
@@ -83,7 +83,7 @@ export default function CTASection() {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="bg-[--empowerment-green] text-white px-8 py-4 rounded-lg hover:bg-green-700 transition-all font-semibold whitespace-nowrap min-h-[44px] shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                className="bg-[#2E7D32] text-white px-8 py-4 rounded-lg hover:bg-green-700 transition-all font-semibold whitespace-nowrap min-h-[44px] shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 aria-label="Submit newsletter signup"
               >
                 {isLoading ? (

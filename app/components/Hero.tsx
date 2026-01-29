@@ -22,7 +22,7 @@ export default function Hero() {
           {/* Left Content */}
           <div className="text-center lg:text-left">
             <h1 
-              className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-[--charcoal] mb-6 leading-tight"
+              className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-[#2D3142] mb-6 leading-tight"
               style={{ fontFamily: 'var(--font-poppins)' }}
             >
               Aprende a Calcular el Costo Real de Enviar Dinero a Casa
@@ -35,13 +35,13 @@ export default function Hero() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <Link
                 href="#newsletter"
-                className="border-2 border-[--trust-blue] text-[--trust-blue] px-8 py-4 rounded-lg hover:bg-blue-50 transition-colors text-base font-semibold min-h-[44px] flex items-center justify-center"
+                className="border-2 border-[--trust-blue] text-[#1565C0] px-8 py-4 rounded-lg hover:bg-blue-50 transition-colors text-base font-semibold min-h-[44px] flex items-center justify-center"
               >
                 Únete a la Lista de Espera
               </Link>
               <Link
                 href="#calculadora"
-                className="border-2 border-[--trust-blue] text-[--trust-blue] px-8 py-4 rounded-lg hover:bg-blue-50 transition-colors text-base font-semibold min-h-[44px] flex items-center justify-center"
+                className="border-2 border-[--trust-blue] text-[#1565C0] px-8 py-4 rounded-lg hover:bg-blue-50 transition-colors text-base font-semibold min-h-[44px] flex items-center justify-center"
               >
                 Prueba la Calculadora
               </Link>
@@ -52,7 +52,7 @@ export default function Hero() {
           {/* <div className="flex justify-center lg:justify-end">
             <div className="bg-white/70 rounded-2xl shadow-2xl p-6 sm:p-8 w-full max-w-md border border-gray-100">
               <h3 
-                className="text-xl font-semibold text-[--charcoal] mb-6"
+                className="text-xl font-semibold text-[#2D3142] mb-6"
                 style={{ fontFamily: 'var(--font-poppins)' }}
               >
                 Calculadora de Costos
@@ -70,7 +70,7 @@ export default function Hero() {
                     type="text"
                     value="300.00"
                     readOnly
-                    className="w-full pl-8 pr-4 py-3 border-2 border-gray-200 rounded-lg text-lg font-semibold text-[--charcoal] bg-gray-50"
+                    className="w-full pl-8 pr-4 py-3 border-2 border-gray-200 rounded-lg text-lg font-semibold text-[#2D3142] bg-gray-50"
                   />
                   <span className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 text-sm">
                     USD
@@ -86,7 +86,7 @@ export default function Hero() {
                   type="text"
                   value="México (MXN)"
                   readOnly
-                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg text-base text-[--charcoal] bg-gray-50"
+                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg text-base text-[#2D3142] bg-gray-50"
                 />
               </div>
 
@@ -95,22 +95,22 @@ export default function Hero() {
               <div className="space-y-3 mb-6">
                 <div className="flex justify-between text-sm">
                   <span className="text-gray-600">Tipo de cambio (mid-market)</span>
-                  <span className="font-medium text-[--charcoal]">$20.50</span>
+                  <span className="font-medium text-[#2D3142]">$20.50</span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span className="text-gray-600">Comisión del servicio</span>
-                  <span className="font-medium text-[--empowerment-green]">$2.99</span>
+                  <span className="font-medium text-[#2E7D32]">$2.99</span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span className="text-gray-600">Margen de tipo de cambio</span>
-                  <span className="font-medium text-[--empowerment-green]">$7.50</span>
+                  <span className="font-medium text-[#2E7D32]">$7.50</span>
                 </div>
               </div>
 
               <div className="bg-[--empowerment-green] bg-opacity-10 rounded-lg p-4">
                 <div className="flex justify-between items-center">
-                  <span className="text-sm font-medium text-[--charcoal]">Costo Total</span>
-                  <span className="text-2xl font-bold text-[--empowerment-green]" style={{ fontFamily: 'var(--font-poppins)' }}>
+                  <span className="text-sm font-medium text-[#2D3142]">Costo Total</span>
+                  <span className="text-2xl font-bold text-[#2E7D32]" style={{ fontFamily: 'var(--font-poppins)' }}>
                     $10.49
                   </span>
                 </div>
