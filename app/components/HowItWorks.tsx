@@ -97,7 +97,7 @@ export default function HowItWorks() {
         {/* CTA */}
         <div className="text-center mt-12">
           <a
-            href="#waitlist"
+            href="#newsletter"
             className="inline-flex items-center justify-center bg-[--empowerment-green] text-white px-8 py-4 rounded-lg hover:bg-green-700 transition-colors text-base font-semibold min-h-[44px] shadow-lg"
           >
             Comienza Ahora

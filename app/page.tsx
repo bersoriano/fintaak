@@ -9,12 +9,17 @@ import Testimonials from "./components/Testimonials";
 import FAQ from "./components/FAQ";
 import CTASection from "./components/CTASection";
 import Footer from "./components/Footer";
+import ScrollToTop from "./components/ScrollToTop";
 
 export default function Home() {
   return (
     <div className="min-h-screen">
+      <a href="#main-content" className="skip-to-content">
+        Saltar al contenido principal
+      </a>
       <Navbar />
-      <Hero />
+      <main id="main-content">
+        <Hero />
       <Partners />
       <Benefits />
       <Transparency />
@@ -23,7 +28,9 @@ export default function Home() {
       <Testimonials />
       <FAQ />
       <CTASection />
+      </main>
       <Footer />
+      <ScrollToTop />
     </div>
   );
 }

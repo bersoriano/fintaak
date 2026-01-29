@@ -66,8 +66,11 @@ export default function FAQ() {
               <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
                 className="w-full px-6 py-5 text-left flex justify-between items-center hover:bg-gray-50 transition-colors min-h-[44px]"
+                aria-expanded={openIndex === index}
+                aria-controls={`faq-answer-${index}`}
+                id={`faq-question-${index}`}
               >
-                <span 
+                <span
                   className="font-semibold text-[--charcoal] pr-4"
                   style={{ fontFamily: 'var(--font-poppins)' }}
                 >
@@ -80,6 +83,7 @@ export default function FAQ() {
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
+                  aria-hidden="true"
                 >
                   <path
                     strokeLinecap="round"
@@ -90,7 +94,12 @@ export default function FAQ() {
                 </svg>
               </button>
               {openIndex === index && (
-                <div className="px-6 pb-5 text-gray-600 leading-relaxed">
+                <div
+                  className="px-6 pb-5 text-gray-600 leading-relaxed"
+                  id={`faq-answer-${index}`}
+                  role="region"
+                  aria-labelledby={`faq-question-${index}`}
+                >
                   {faq.answer}
                 </div>
               )}

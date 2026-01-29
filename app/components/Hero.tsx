@@ -34,7 +34,7 @@ export default function Hero() {
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <Link
-                href="#waitlist"
+                href="#newsletter"
                 className="border-2 border-[--trust-blue] text-[--trust-blue] px-8 py-4 rounded-lg hover:bg-blue-50 transition-colors text-base font-semibold min-h-[44px] flex items-center justify-center"
               >
                 Únete a la Lista de Espera

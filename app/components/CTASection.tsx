@@ -5,16 +5,42 @@ import { useState } from "react";
 export default function CTASection() {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const validateEmail = (email: string) => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Implement newsletter signup
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 3000);
+    setError("");
+
+    // Validate email
+    if (!email) {
+      setError("Por favor ingresa tu email");
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      setError("Por favor ingresa un email válido");
+      return;
+    }
+
+    setIsLoading(true);
+
+    // Simulate API call
+    setTimeout(() => {
+      setIsLoading(false);
+      setSubmitted(true);
+      setEmail("");
+      setTimeout(() => setSubmitted(false), 5000);
+    }, 1000);
   };
 
   return (
-    <section className="py-16 md:py-24 bg-gradient-to-br from-[--trust-blue] to-blue-700" id="waitlist">
+    <section className="py-16 md:py-24 bg-gradient-to-br from-[--trust-blue] to-blue-700" id="newsletter">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         {/* Headline */}
         <h2 
@@ -31,24 +57,51 @@ export default function CTASection() {
         {!submitted ? (
           <form onSubmit={handleSubmit} className="max-w-md mx-auto mb-8">
             <div className="flex flex-col sm:flex-row gap-3">
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="tu@email.com"
-                required
-                className="flex-1 px-6 py-4 rounded-lg text-[--charcoal] text-base focus:outline-none focus:ring-2 focus:ring-white min-h-[44px]"
-              />
+              <div className="flex-1">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    setError("");
+                  }}
+                  placeholder="tu@email.com"
+                  disabled={isLoading}
+                  className={`w-full px-6 py-4 rounded-lg text-[--charcoal] text-base focus:outline-none focus:ring-2 focus:ring-white min-h-[44px] transition-all ${
+                    error ? "ring-2 ring-red-300" : ""
+                  } ${isLoading ? "opacity-50 cursor-not-allowed" : ""}`}
+                  aria-label="Email address"
+                  aria-invalid={!!error}
+                  aria-describedby={error ? "email-error" : undefined}
+                />
+                {error && (
+                  <p id="email-error" className="text-red-100 text-sm mt-2 ml-2">
+                    {error}
+                  </p>
+                )}
+              </div>
               <button
                 type="submit"
-                className="bg-[--empowerment-green] text-white px-8 py-4 rounded-lg hover:bg-green-700 transition-colors font-semibold whitespace-nowrap min-h-[44px] shadow-lg"
+                disabled={isLoading}
+                className="bg-[--empowerment-green] text-white px-8 py-4 rounded-lg hover:bg-green-700 transition-all font-semibold whitespace-nowrap min-h-[44px] shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                aria-label="Submit newsletter signup"
               >
-                Únete Ahora
+                {isLoading ? (
+                  <>
+                    <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Enviando...
+                  </>
+                ) : (
+                  "Únete Ahora"
+                )}
               </button>
             </div>
           </form>
         ) : (
-          <div className="max-w-md mx-auto mb-8 bg-white bg-opacity-20 rounded-lg p-6 backdrop-blur">
+          <div className="max-w-md mx-auto mb-8 bg-white bg-opacity-20 rounded-lg p-6 backdrop-blur animate-fadeIn">
             <div className="flex items-center justify-center gap-2 text-white">
               <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
