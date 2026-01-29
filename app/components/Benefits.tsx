@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function Benefits() {
   const benefits = [
     {
@@ -44,7 +46,7 @@ export default function Benefits() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 
+          <h2
             className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-[--charcoal] mb-4"
             style={{ fontFamily: 'var(--font-poppins)' }}
           >
@@ -55,31 +57,44 @@ export default function Benefits() {
           </p>
         </div>
 
-        {/* Benefits Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
-          {benefits.map((benefit, index) => (
-            <div 
-              key={index}
-              className="bg-white border border-gray-200 rounded-xl p-6 sm:p-8 hover:shadow-lg transition-shadow duration-300"
-            >
-              <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 w-12 h-12 bg-[--trust-blue] bg-opacity-10 rounded-lg flex items-center justify-center text-[--trust-blue]">
-                  {benefit.icon}
-                </div>
-                <div className="flex-1">
-                  <h3 
-                    className="text-xl font-semibold text-[--charcoal] mb-3"
-                    style={{ fontFamily: 'var(--font-poppins)' }}
-                  >
-                    {benefit.title}
-                  </h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    {benefit.description}
-                  </p>
+        {/* Content Grid - Image and Benefits */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          {/* Image Section */}
+          <div className="relative h-[400px] lg:h-[600px] rounded-2xl overflow-hidden shadow-2xl">
+            <Image
+              src="/young-man-w-phone.jpg"
+              alt="Pareja usando la aplicación Fintaak"
+              fill
+              className="object-cover"
+            />
+          </div>
+
+          {/* Benefits Grid */}
+          <div className="grid grid-cols-1 gap-6">
+            {benefits.map((benefit, index) => (
+              <div
+                key={index}
+                className="bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-shadow duration-300"
+              >
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 w-12 h-12 bg-[--trust-blue] bg-opacity-10 rounded-lg flex items-center justify-center text-[--trust-blue]">
+                    {benefit.icon}
+                  </div>
+                  <div className="flex-1">
+                    <h3
+                      className="text-xl font-semibold text-[--charcoal] mb-3"
+                      style={{ fontFamily: 'var(--font-poppins)' }}
+                    >
+                      {benefit.title}
+                    </h3>
+                    <p className="text-gray-600 leading-relaxed">
+                      {benefit.description}
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>

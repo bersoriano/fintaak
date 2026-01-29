@@ -3,8 +3,21 @@ import Link from "next/link";
 
 export default function Hero() {
   return (
-    <section className="pt-24 pb-12 md:pt-32 md:pb-20 bg-gradient-to-b from-blue-50 to-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="relative pt-24 pb-12 md:pt-32 md:pb-20 overflow-hidden">
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/hero.jpg"
+          alt="Background"
+          fill
+          className="object-cover"
+          priority
+        />
+        {/* Overlay for text readability */}
+        <div className="absolute inset-0 bg-white/50"></div>
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
           <div className="text-center lg:text-left">
@@ -22,7 +35,7 @@ export default function Hero() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <Link
                 href="#waitlist"
-                className="bg-[--trust-blue] text-white px-8 py-4 rounded-lg hover:bg-blue-700 transition-colors text-base font-semibold min-h-[44px] flex items-center justify-center shadow-lg"
+                className="border-2 border-[--trust-blue] text-[--trust-blue] px-8 py-4 rounded-lg hover:bg-blue-50 transition-colors text-base font-semibold min-h-[44px] flex items-center justify-center"
               >
                 Únete a la Lista de Espera
               </Link>
@@ -36,8 +49,8 @@ export default function Hero() {
           </div>
 
           {/* Right Side - Calculator Mockup */}
-          <div className="flex justify-center lg:justify-end">
-            <div className="bg-white rounded-2xl shadow-2xl p-6 sm:p-8 w-full max-w-md border border-gray-100">
+          {/* <div className="flex justify-center lg:justify-end">
+            <div className="bg-white/70 rounded-2xl shadow-2xl p-6 sm:p-8 w-full max-w-md border border-gray-100">
               <h3 
                 className="text-xl font-semibold text-[--charcoal] mb-6"
                 style={{ fontFamily: 'var(--font-poppins)' }}
@@ -45,7 +58,6 @@ export default function Hero() {
                 Calculadora de Costos
               </h3>
               
-              {/* Amount Input */}
               <div className="mb-6">
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Cantidad a Enviar
@@ -66,7 +78,6 @@ export default function Hero() {
                 </div>
               </div>
 
-              {/* Destination */}
               <div className="mb-6">
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Destino
@@ -79,10 +90,8 @@ export default function Hero() {
                 />
               </div>
 
-              {/* Divider */}
               <div className="border-t border-gray-200 my-6"></div>
 
-              {/* Cost Breakdown */}
               <div className="space-y-3 mb-6">
                 <div className="flex justify-between text-sm">
                   <span className="text-gray-600">Tipo de cambio (mid-market)</span>
@@ -98,7 +107,6 @@ export default function Hero() {
                 </div>
               </div>
 
-              {/* Total */}
               <div className="bg-[--empowerment-green] bg-opacity-10 rounded-lg p-4">
                 <div className="flex justify-between items-center">
                   <span className="text-sm font-medium text-[--charcoal]">Costo Total</span>
@@ -111,7 +119,7 @@ export default function Hero() {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </section>

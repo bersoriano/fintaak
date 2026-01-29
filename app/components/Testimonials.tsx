@@ -29,8 +29,8 @@ export default function Testimonials() {
     <section className="py-16 md:py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 
+        <div className="text-center mb-12">
+          <h2
             className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-[--charcoal] mb-4"
             style={{ fontFamily: 'var(--font-poppins)' }}
           >
@@ -39,6 +39,20 @@ export default function Testimonials() {
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Miles de familias ya confían en Fintaak para sus envíos de dinero
           </p>
+        </div>
+
+        {/* Video */}
+        <div className="relative h-[300px] md:h-[400px] lg:h-[900px] rounded-2xl overflow-hidden shadow-2xl mb-16">
+          <video
+            className="w-full h-full object-cover"
+            autoPlay
+            loop
+            muted
+            playsInline
+          >
+            <source src="/video test.mp4" type="video/mp4" />
+            Tu navegador no soporta el elemento de video.
+          </video>
         </div>
 
         {/* Testimonials Grid */}
