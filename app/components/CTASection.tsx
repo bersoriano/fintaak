@@ -17,7 +17,6 @@ export default function CTASection() {
     e.preventDefault();
     setError("");
 
-    // Validate email
     if (!email) {
       setError("Por favor ingresa tu email");
       return;
@@ -30,20 +29,35 @@ export default function CTASection() {
 
     setIsLoading(true);
 
-    // Simulate API call
-    setTimeout(() => {
-      setIsLoading(false);
+    try {
+      const res = await fetch("/api/newsletter/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "Error al suscribirte");
+      }
+
       setSubmitted(true);
       setEmail("");
-      setTimeout(() => setSubmitted(false), 5000);
-    }, 1000);
+    } catch (err) {
+      setError(
+        err instanceof Error ? err.message : "Error al suscribirte. Intenta de nuevo."
+      );
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
     <section className="py-16 md:py-24 bg-gradient-to-br from-[--trust-blue] to-blue-700" id="newsletter">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         {/* Headline */}
-        <h2 
+        <h2
           className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-white mb-6"
           style={{ fontFamily: 'var(--font-poppins)' }}
         >
@@ -138,7 +152,7 @@ export default function CTASection() {
 
         {/* Trust Note */}
         <p className="mt-8 text-sm text-blue-200">
-          📧 Enviamos un email semanal con consejos útiles. Sin spam, cancela cuando quieras.
+          Enviamos un email semanal con consejos útiles. Sin spam, cancela cuando quieras.
         </p>
       </div>
     </section>

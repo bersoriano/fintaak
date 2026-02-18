@@ -1,16 +1,9 @@
-import { Resend } from "resend";
 import { NextResponse } from "next/server";
+import { getResend, FROM_EMAIL } from "@/lib/resend";
 
 export async function POST(request: Request) {
   try {
-    if (!process.env.RESEND_API_KEY) {
-      return NextResponse.json(
-        { error: "Servicio de email no configurado" },
-        { status: 503 }
-      );
-    }
-
-    const resend = new Resend(process.env.RESEND_API_KEY);
+    const resend = getResend();
     const { name, email, message } = await request.json();
 
     if (!name || !email || !message) {
@@ -29,7 +22,7 @@ export async function POST(request: Request) {
     }
 
     await resend.emails.send({
-      from: "Fintaak Contacto <onboarding@resend.dev>",
+      from: FROM_EMAIL,
       to: "bsorianocode@gmail.com",
       replyTo: email,
       subject: `Nuevo mensaje de contacto de ${name}`,
