@@ -1,48 +1,86 @@
 export default function Partners() {
+  const indicators = [
+    {
+      title: "Encriptación de nivel bancario",
+      description: "Tus datos y transferencias protegidos con cifrado de extremo a extremo.",
+      color: "#1565C0",
+      icon: (
+        /* Lock/padlock — encryption */
+        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+          <rect x="5" y="11" width="14" height="10" rx="2" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M8 11V7a4 4 0 118 0v4" />
+          <circle cx="12" cy="16" r="1.5" fill="currentColor" stroke="none" />
+        </svg>
+      )
+    },
+    {
+      title: "Cumplimiento regulatorio completo",
+      description: "Operamos bajo todas las regulaciones financieras aplicables en EE.UU. y México.",
+      color: "#2E7D32",
+      icon: (
+        /* Document with checkmark — compliance */
+        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8l-5-5z" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M14 3v5h5" />
+        </svg>
+      )
+    },
+    {
+      title: "Protección contra fraudes 24/7",
+      description: "Monitoreo constante de cada transacción para detectar y prevenir actividad sospechosa.",
+      color: "#F57C00",
+      icon: (
+        /* Shield with eye — fraud monitoring */
+        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+          <circle cx="12" cy="12" r="2" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M8 12c1-2.5 3-3.5 4-3.5s3 1 4 3.5c-1 2.5-3 3.5-4 3.5s-3-1-4-3.5z" />
+        </svg>
+      )
+    }
+  ];
+
   return (
-    <section className="py-12 md:py-16 bg-gray-50">
+    <section className="py-16 md:py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-8">
-          <p className="text-sm font-medium text-gray-500 uppercase tracking-wide mb-4">
+        {/* Header */}
+        <div className="text-center mb-12">
+          <h2
+            className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#2D3142] mb-4"
+            style={{ fontFamily: 'var(--font-poppins)' }}
+          >
             Confianza y Seguridad
-          </p>
-          <h3 className="text-lg text-[#2D3142] max-w-2xl mx-auto">
+          </h2>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Tu dinero está protegido por los más altos estándares de seguridad financiera
-          </h3>
+          </p>
         </div>
 
-        {/* Placeholder for partner logos */}
-        {/* <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-items-center opacity-50">
-          {[1, 2, 3].map((item) => (
-            <div 
-              key={item}
-              className="w-32 h-16 bg-gray-200 rounded-lg flex items-center justify-center"
+        {/* Trust indicators */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
+          {indicators.map((item, index) => (
+            <div
+              key={index}
+              className="bg-white rounded-2xl border border-gray-200 p-6 text-center hover:shadow-md transition-shadow duration-300"
             >
-              <span className="text-gray-400 text-xs">Logo {item}</span>
+              <div
+                className="w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4"
+                style={{ backgroundColor: `${item.color}15`, color: item.color }}
+              >
+                {item.icon}
+              </div>
+              <h4
+                className="font-semibold text-[#2D3142] mb-2"
+                style={{ fontFamily: 'var(--font-poppins)' }}
+              >
+                {item.title}
+              </h4>
+              <p className="text-sm text-gray-600 leading-relaxed">
+                {item.description}
+              </p>
             </div>
           ))}
-        </div> */}
-
-        {/* Trust indicators */}
-        <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl mx-auto">
-          <div className="text-center">
-            <div className="text-2xl font-bold text-[#1565C0] mb-1" style={{ fontFamily: 'var(--font-poppins)' }}>
-              🔒
-            </div>
-            <p className="text-sm text-gray-600">Encriptación de nivel bancario</p>
-          </div>
-          <div className="text-center">
-            <div className="text-2xl font-bold text-[#1565C0] mb-1" style={{ fontFamily: 'var(--font-poppins)' }}>
-              ✓
-            </div>
-            <p className="text-sm text-gray-600">Cumplimiento regulatorio completo</p>
-          </div>
-          <div className="text-center">
-            <div className="text-2xl font-bold text-[#1565C0] mb-1" style={{ fontFamily: 'var(--font-poppins)' }}>
-              🛡️
-            </div>
-            <p className="text-sm text-gray-600">Protección contra fraudes 24/7</p>
-          </div>
         </div>
       </div>
     </section>

@@ -5,37 +5,47 @@ export default function Benefits() {
     {
       title: "Sabes Exactamente Lo Que Pagas",
       description: "Te enseñamos cómo funcionan las remesas, cómo identificar costos ocultos y cómo entender el tipo de cambio para que sepas lo que realmente estás pagando.",
+      color: "#2E7D32",
       icon: (
-        <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        /* Receipt with dollar — knowing the full cost */
+        <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M9 14l6-6m-5.5.5h.01m4.99 5h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2z" />
         </svg>
       )
     },
     {
       title: "Lo Que Ves Es Lo Que Pagas",
       description: "Siempre verás la comisión, la diferencia del tipo de cambio, y el monto exacto que pagarás antes de enviar, sin sorpresas ni promociones engañosas.",
+      color: "#1565C0",
       icon: (
-        <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+        /* Eye with checkmark — clarity and visibility */
+        <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M10 12l1.5 1.5L14 11" />
         </svg>
       )
     },
     {
       title: "Transferencias Instantáneas",
       description: "Tu familia recibe el dinero al instante, sin tiempos de espera ni preocupaciones.",
+      color: "#F57C00",
       icon: (
-        <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+        /* Clock with arrow — speed and instant delivery */
+        <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+          <circle cx="12" cy="12" r="9" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M12 7v5l3 3" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 3.5l2 2m-2 0l2-2" />
         </svg>
       )
     },
     {
       title: "Tu Dinero Seguro",
       description: "Tu dinero está protegido desde el momento que lo envías hasta que tu familia lo recibe. Cada transferencia pasa por canales seguros y regulados.",
+      color: "#1565C0",
       icon: (
-        <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+        /* Shield with checkmark — security and trust */
+        <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
         </svg>
       )
     }
@@ -70,28 +80,27 @@ export default function Benefits() {
           </div>
 
           {/* Benefits Grid */}
-          <div className="grid grid-cols-1 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-5">
             {benefits.map((benefit, index) => (
               <div
                 key={index}
-                className="bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-shadow duration-300"
+                className="bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-shadow duration-300 flex flex-col"
               >
-                <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-12 h-12 bg-[#1565C0] bg-opacity-10 rounded-lg flex items-center justify-center text-[#1565C0]">
-                    {benefit.icon}
-                  </div>
-                  <div className="flex-1">
-                    <h3
-                      className="text-xl font-semibold text-[#2D3142] mb-3"
-                      style={{ fontFamily: 'var(--font-poppins)' }}
-                    >
-                      {benefit.title}
-                    </h3>
-                    <p className="text-gray-600 leading-relaxed">
-                      {benefit.description}
-                    </p>
-                  </div>
+                <div
+                  className="flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center mb-4"
+                  style={{ backgroundColor: `${benefit.color}10`, color: benefit.color }}
+                >
+                  {benefit.icon}
                 </div>
+                <h3
+                  className="text-lg font-semibold text-[#2D3142] mb-2"
+                  style={{ fontFamily: 'var(--font-poppins)' }}
+                >
+                  {benefit.title}
+                </h3>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  {benefit.description}
+                </p>
               </div>
             ))}
           </div>
