@@ -10,6 +10,13 @@ import { getResend, FROM_EMAIL, RESEND_AUDIENCE_ID } from "@/lib/resend";
 import WelcomeTemplate from "@/emails/WelcomeTemplate";
 import type { SubscribePayload, ApiResponse } from "@/lib/types/email";
 
+export async function GET() {
+  return NextResponse.json<ApiResponse>(
+    { success: false, error: "Usa POST para suscribirte" },
+    { status: 405 }
+  );
+}
+
 export async function POST(request: Request) {
   try {
     const body = (await request.json()) as SubscribePayload;
