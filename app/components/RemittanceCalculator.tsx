@@ -182,7 +182,7 @@ export default function RemittanceCalculator() {
   }
 
   return (
-    <section className="py-16 md:py-24 bg-gray-50" id="calculadora">
+    <section className="py-16 md:py-24 bg-white" id="calculadora">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
