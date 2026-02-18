@@ -12,8 +12,8 @@ export default function Partners() {
         </div>
 
         {/* Placeholder for partner logos */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-items-center opacity-50">
-          {[1, 2, 3, 4].map((item) => (
+        {/* <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-items-center opacity-50">
+          {[1, 2, 3].map((item) => (
             <div 
               key={item}
               className="w-32 h-16 bg-gray-200 rounded-lg flex items-center justify-center"
@@ -21,7 +21,7 @@ export default function Partners() {
               <span className="text-gray-400 text-xs">Logo {item}</span>
             </div>
           ))}
-        </div>
+        </div> */}
 
         {/* Trust indicators */}
         <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl mx-auto">

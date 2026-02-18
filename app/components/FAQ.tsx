@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import ContactForm from "./ContactForm";
 
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -107,24 +108,8 @@ export default function FAQ() {
           ))}
         </div>
 
-        {/* Contact CTA */}
-        <div className="mt-12 text-center bg-blue-50 rounded-2xl p-8">
-          <h3 
-            className="text-xl font-semibold text-[#2D3142] mb-2"
-            style={{ fontFamily: 'var(--font-poppins)' }}
-          >
-            ¿Tienes más preguntas?
-          </h3>
-          <p className="text-gray-600 mb-6">
-            Nuestro equipo de soporte está listo para ayudarte
-          </p>
-          <a
-            href="#contact"
-            className="inline-flex items-center justify-center bg-[#1565C0] text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold min-h-[44px]"
-          >
-            Contáctanos
-          </a>
-        </div>
+        {/* Contact Form */}
+        <ContactForm />
       </div>
     </section>
   );

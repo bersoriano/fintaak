@@ -62,7 +62,7 @@ export default function Benefits() {
           {/* Image Section */}
           <div className="relative h-[400px] lg:h-[600px] rounded-2xl overflow-hidden shadow-2xl">
             <Image
-              src="/young-man-w-phone.jpg"
+              src="/young-man-w-phone1.jpg"
               alt="Pareja usando la aplicación Fintaak"
               fill
               className="object-cover"

@@ -11,20 +11,17 @@ export default function Footer() {
     recursos: [
       { label: "Blog", href: "/blog" },
       { label: "Centro de Ayuda", href: "#ayuda" },
-      { label: "Guías Educativas", href: "#guias" },
       { label: "Preguntas Frecuentes", href: "#faq" },
     ],
     empresa: [
       { label: "Nuestra Misión", href: "#mision" },
       { label: "Sobre Nosotros", href: "#about" },
-      { label: "Carreras", href: "#careers" },
       { label: "Contacto", href: "#contact" },
     ],
     legal: [
-      { label: "Términos de Servicio", href: "#terms" },
-      { label: "Política de Privacidad", href: "#privacy" },
-      { label: "Cumplimiento", href: "#compliance" },
-      { label: "Licencias", href: "#licenses" },
+      { label: "Terminos", href: "#terminos" },
+      { label: "Privacidad", href: "#privacidad" },
+      { label: "Cookies", href: "#cookies" },
     ],
   };
 

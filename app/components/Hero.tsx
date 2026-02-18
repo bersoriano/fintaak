@@ -7,7 +7,7 @@ export default function Hero() {
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/hero.jpg"
+          src="/hero1.jpg"
           alt="Background"
           fill
           className="object-cover"
@@ -35,13 +35,13 @@ export default function Hero() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <Link
                 href="#newsletter"
-                className="border-2 border-[--trust-blue] text-[#1565C0] px-8 py-4 rounded-lg hover:bg-blue-50 transition-colors text-base font-semibold min-h-[44px] flex items-center justify-center"
+                className="bg-[#2E7D32] text-white px-8 py-4 rounded-lg hover:bg-green-800 transition-colors text-base font-semibold min-h-[44px] flex items-center justify-center shadow-lg"
               >
                 Únete a la Lista de Espera
               </Link>
               <Link
                 href="#calculadora"
-                className="border-2 border-[--trust-blue] text-[#1565C0] px-8 py-4 rounded-lg hover:bg-blue-50 transition-colors text-base font-semibold min-h-[44px] flex items-center justify-center"
+                className="border-2 border-[#2E7D32] text-[#2E7D32] px-8 py-4 rounded-lg hover:bg-green-50 transition-colors text-base font-semibold min-h-[44px] flex items-center justify-center"
               >
                 Prueba la Calculadora
               </Link>

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -35,6 +36,7 @@ export default function Navbar() {
     { label: "Calculadora", href: "#calculadora" },
     { label: "Blog", href: "/blog" },
     { label: "Nuestra Misión", href: "#mision" },
+    { label: "Contacto", href: "#contacto" },
   ];
 
   return (
@@ -42,10 +44,14 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center">
-            <span className="text-2xl font-bold text-[#1565C0]" style={{ fontFamily: 'var(--font-poppins)' }}>
-              Fintaak
-            </span>
+          <Link href="/" className="flex items-center" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+            <Image
+              src="/logo.png"
+              alt="Fintaak"
+              width={120}
+              height={40}
+              priority
+            />
           </Link>
 
           {/* Desktop Navigation */}
@@ -61,7 +67,7 @@ export default function Navbar() {
             ))}
             <Link
               href="#newsletter"
-              className="bg-[#1565C0] text-white px-6 py-2.5 rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium min-h-[44px] min-w-[44px] flex items-center justify-center"
+              className="bg-[#2E7D32] text-white px-6 py-2.5 rounded-lg hover:bg-green-800 transition-colors text-sm font-medium min-h-[44px] min-w-[44px] flex items-center justify-center"
             >
               Únete al Newsletter
             </Link>
@@ -71,7 +77,7 @@ export default function Navbar() {
           <div className="flex items-center gap-2 md:hidden">
             <Link
               href="#newsletter"
-              className="bg-[#1565C0] text-white px-4 py-2.5 rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium min-h-[44px] min-w-[44px] flex items-center justify-center"
+              className="bg-[#2E7D32] text-white px-4 py-2.5 rounded-lg hover:bg-green-800 transition-colors text-sm font-medium min-h-[44px] min-w-[44px] flex items-center justify-center"
             >
               Newsletter
             </Link>

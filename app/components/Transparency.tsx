@@ -1,6 +1,6 @@
 export default function Transparency() {
   return (
-    <section className="py-16 md:py-24 bg-white" id="calculadora">
+    <section className="py-16 md:py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           {/* Section Header */}
@@ -38,7 +38,7 @@ export default function Transparency() {
               <div className="bg-white rounded-lg px-6 py-4 shadow-md min-w-[140px] text-center">
                 <div className="text-sm text-gray-500 mb-1">Comisión</div>
                 <div className="text-xl font-bold text-[#1565C0]" style={{ fontFamily: 'var(--font-poppins)' }}>
-                  $2.99
+                  $1.99
                 </div>
               </div>
 
@@ -49,7 +49,7 @@ export default function Transparency() {
               <div className="bg-white rounded-lg px-6 py-4 shadow-md min-w-[140px] text-center">
                 <div className="text-sm text-gray-500 mb-1">Tipo de Cambio</div>
                 <div className="text-xl font-bold text-[#1565C0]" style={{ fontFamily: 'var(--font-poppins)' }}>
-                  $7.50
+                  $2.10
                 </div>
               </div>
 
@@ -60,7 +60,7 @@ export default function Transparency() {
               <div className="bg-[--empowerment-green] rounded-lg px-6 py-4 shadow-md min-w-[140px] text-center">
                 <div className="text-sm text-white mb-1">Costo Total</div>
                 <div className="text-xl font-bold text-white" style={{ fontFamily: 'var(--font-poppins)' }}>
-                  $10.49
+                  $4.09 (1.36%)
                 </div>
               </div>
             </div>
