@@ -21,9 +21,25 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
   if (!post) return {}
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://fintaak.com";
+
   return {
-    title: `${post.title} | Fintaak Blog`,
+    title: post.title,
     description: post.excerpt,
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      type: "article",
+      url: `${siteUrl}/blog/${slug}`,
+      ...(post.featuredImage?.asset && {
+        images: [{ url: urlFor(post.featuredImage).width(1200).height(630).url() }],
+      }),
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.excerpt,
+    },
   }
 }
 

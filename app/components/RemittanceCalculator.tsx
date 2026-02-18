@@ -20,7 +20,7 @@ const providers: Provider[] = [
     emoji: "⚡",
     getFixedFee: () => 0,
     getMarkupPct: () => 0.75,
-    note: "No fixed fee, low markup — often the cheapest option.",
+    note: "Sin comisión fija, margen bajo — generalmente la opción más económica.",
   },
   {
     id: "paysend",
@@ -28,7 +28,7 @@ const providers: Provider[] = [
     emoji: "💳",
     getFixedFee: () => 0.99,
     getMarkupPct: () => 0.85,
-    note: "Low fixed fee with competitive exchange rate.",
+    note: "Comisión fija baja con tipo de cambio competitivo.",
   },
   {
     id: "moneygram",
@@ -41,7 +41,7 @@ const providers: Provider[] = [
       return 7.99;
     },
     getMarkupPct: () => 0.55,
-    note: "Higher fixed fees but very low FX markup. Fixed fee may vary on weekends.",
+    note: "Comisiones fijas más altas pero margen cambiario muy bajo. La comisión puede variar los fines de semana.",
   },
   {
     id: "western-union",
@@ -49,7 +49,7 @@ const providers: Provider[] = [
     emoji: "🟡",
     getFixedFee: () => 1.99,
     getMarkupPct: (amount) => (amount < 400 ? 1.85 : 1.15),
-    note: "FX spread improves significantly at $400+.",
+    note: "El margen cambiario mejora significativamente a partir de $400+.",
   },
   {
     id: "ria",
@@ -57,7 +57,7 @@ const providers: Provider[] = [
     emoji: "🟢",
     getFixedFee: () => 1.99,
     getMarkupPct: (amount) => (amount < 600 ? 1.2 : 1.1),
-    note: "FX spread improves slightly at $600+.",
+    note: "El margen cambiario mejora ligeramente a partir de $600+.",
   },
   {
     id: "felix-pago",
@@ -65,7 +65,7 @@ const providers: Provider[] = [
     emoji: "🦊",
     getFixedFee: () => 2.99,
     getMarkupPct: () => 1.7,
-    note: "Higher fixed fee with moderate markup.",
+    note: "Comisión fija más alta con margen moderado.",
   },
   {
     id: "remitly",
@@ -73,7 +73,7 @@ const providers: Provider[] = [
     emoji: "📲",
     getFixedFee: () => 1.99,
     getMarkupPct: (amount) => (amount < 500 ? 3.88 : 1.45),
-    note: "Very high markup under $500. Improves considerably at $500+.",
+    note: "Margen muy alto por debajo de $500. Mejora considerablemente a partir de $500+.",
   },
   {
     id: "worldremit",
@@ -81,7 +81,7 @@ const providers: Provider[] = [
     emoji: "🌍",
     getFixedFee: () => 1.99,
     getMarkupPct: () => 2.3,
-    note: "Consistently high FX markup regardless of amount sent.",
+    note: "Margen cambiario consistentemente alto sin importar el monto enviado.",
   },
 ];
 

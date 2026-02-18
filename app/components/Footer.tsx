@@ -19,9 +19,9 @@ export default function Footer() {
       { label: "Contacto", href: "#contact" },
     ],
     legal: [
-      { label: "Terminos", href: "#terminos" },
-      { label: "Privacidad", href: "#privacidad" },
-      { label: "Cookies", href: "#cookies" },
+      { label: "Términos", href: "/legal/terminos" },
+      { label: "Privacidad", href: "/legal/privacidad" },
+      { label: "Cookies", href: "/legal/cookies" },
     ],
   };
 
@@ -193,13 +193,13 @@ export default function Footer() {
               © {new Date().getFullYear()} Fintaak. Todos los derechos reservados.
             </p>
             <div className="flex gap-6 text-sm">
-              <Link href="#terms" className="text-gray-400 hover:text-white transition-colors">
+              <Link href="/legal/terminos" className="text-gray-400 hover:text-white transition-colors">
                 Términos
               </Link>
-              <Link href="#privacy" className="text-gray-400 hover:text-white transition-colors">
+              <Link href="/legal/privacidad" className="text-gray-400 hover:text-white transition-colors">
                 Privacidad
               </Link>
-              <Link href="#cookies" className="text-gray-400 hover:text-white transition-colors">
+              <Link href="/legal/cookies" className="text-gray-400 hover:text-white transition-colors">
                 Cookies
               </Link>
             </div>

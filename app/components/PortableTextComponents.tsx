@@ -66,7 +66,7 @@ export const components: PortableTextComponents = {
           <div className="relative w-full h-96">
             <Image
               src={urlFor(value).width(1200).height(600).url()}
-              alt={value.alt || 'Blog image'}
+              alt={value.alt || 'Imagen del blog'}
               fill
               className="object-cover rounded-lg"
             />

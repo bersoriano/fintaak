@@ -84,7 +84,7 @@ export default function CTASection() {
                   className={`w-full px-6 py-4 rounded-lg text-[#2D3142] text-base bg-white border-2 focus:outline-none focus:ring-2 focus:ring-[#2E7D32] min-h-[44px] transition-all ${
                     error ? "border-[#D32F2F] ring-2 ring-[#D32F2F]/30" : "border-gray-200"
                   } ${isLoading ? "opacity-50 cursor-not-allowed" : ""}`}
-                  aria-label="Email address"
+                  aria-label="Dirección de email"
                   aria-invalid={!!error}
                   aria-describedby={error ? "email-error" : undefined}
                 />
@@ -98,7 +98,7 @@ export default function CTASection() {
                 type="submit"
                 disabled={isLoading}
                 className="bg-[#2E7D32] text-white px-8 py-4 rounded-lg hover:bg-green-700 transition-all font-semibold whitespace-nowrap min-h-[44px] shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-                aria-label="Submit newsletter signup"
+                aria-label="Enviar suscripción"
               >
                 {isLoading ? (
                   <>

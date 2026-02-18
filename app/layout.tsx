@@ -14,9 +14,70 @@ const poppins = Poppins({
   weight: ["600", "700"],
 });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://fintaak.com";
+
 export const metadata: Metadata = {
-  title: "Fintaak - Aprende a Calcular el Costo Real de Enviar Dinero a Casa",
-  description: "Usa nuestra calculadora gratis y recibe artículos educativos. Sé de los primeros en acceder a la app cuando lancemos.",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: "Fintaak - Calcula el Costo Real de Enviar Dinero a México",
+    template: "%s | Fintaak",
+  },
+  description:
+    "Compara proveedores de remesas, calcula comisiones y tipo de cambio real. Transparencia total para enviar dinero a México desde EE.UU.",
+  keywords: [
+    "remesas",
+    "enviar dinero a México",
+    "costo de remesas",
+    "tipo de cambio",
+    "transferencias internacionales",
+    "calculadora de remesas",
+    "Western Union",
+    "Remitly",
+    "Sendwave",
+    "dinero a casa",
+    "comisiones ocultas",
+    "fintaak",
+  ],
+  authors: [{ name: "Fintaak" }],
+  creator: "Fintaak",
+  openGraph: {
+    type: "website",
+    locale: "es_MX",
+    url: siteUrl,
+    siteName: "Fintaak",
+    title: "Fintaak - Calcula el Costo Real de Enviar Dinero a México",
+    description:
+      "Compara proveedores de remesas, calcula comisiones y tipo de cambio real. Transparencia total para enviar dinero a México desde EE.UU.",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Fintaak - Transparencia en cada transferencia",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Fintaak - Calcula el Costo Real de Enviar Dinero a México",
+    description:
+      "Compara proveedores de remesas, calcula comisiones y tipo de cambio real. Transparencia total.",
+    images: ["/og-image.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  alternates: {
+    canonical: siteUrl,
+  },
 };
 
 export default function RootLayout({

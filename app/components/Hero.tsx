@@ -8,7 +8,7 @@ export default function Hero() {
       <div className="absolute inset-0 z-0">
         <Image
           src="/hero1.jpg"
-          alt="Background"
+          alt="Fondo de la página principal de Fintaak"
           fill
           className="object-cover"
           priority
