@@ -26,5 +26,5 @@ export function getResend(): Resend {
  * After verification, update FROM_EMAIL to use your domain for
  * proper DKIM/SPF alignment and better deliverability.
  */
-export const FROM_EMAIL = "Fintaak <onboarding@resend.dev>";
+export const FROM_EMAIL = "Fintaak <hello@fintaak.com>";
 export const RESEND_AUDIENCE_ID = process.env.RESEND_AUDIENCE_ID ?? "";
