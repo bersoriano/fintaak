@@ -174,7 +174,7 @@ POST /api/contact
         │
         ├── Validate all fields present + email format
         │
-        ├── Send email to bsorianocode@gmail.com
+        ├── Send email to hello@fintaak.com
         │   └── Plain HTML (not React Email template)
         │   └── Reply-to set to user's email
         │
