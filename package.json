@@ -10,6 +10,7 @@
     "email": "email dev --port 3001"
   },
   "dependencies": {
+    "@next/third-parties": "^16.1.6",
     "@portabletext/react": "^6.0.2",
     "@react-email/components": "^1.0.7",
     "@sanity/icons": "^3.7.4",
