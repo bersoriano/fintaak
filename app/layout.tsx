@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Poppins } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import MetaPixel from "./components/MetaPixel";
 import "./globals.css";
 
 const inter = Inter({
@@ -97,6 +98,9 @@ export default function RootLayout({
       </body>
       {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
         <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
+      )}
+      {process.env.NEXT_PUBLIC_META_PIXEL_ID && (
+        <MetaPixel pixelId={process.env.NEXT_PUBLIC_META_PIXEL_ID} />
       )}
     </html>
   );
