@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useMemo, useRef, useEffect } from "react";
+import { useState, useMemo, useRef, useEffect, useCallback } from "react";
+import { sendGAEvent } from "@next/third-parties/google";
 
 const MID_RATE = 17.4;
 
@@ -131,6 +132,7 @@ export default function RemittanceCalculator() {
   const [isCustom, setIsCustom] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const customAmountDebounce = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -170,16 +172,21 @@ export default function RemittanceCalculator() {
     setAmount(val);
     setIsCustom(false);
     setCustomAmount("");
+    sendGAEvent("event", "amount_preset_clicked", { amount: val });
   }
 
-  function handleCustomChange(val: string) {
+  const handleCustomChange = useCallback((val: string) => {
     setCustomAmount(val);
     const num = parseFloat(val);
     if (!isNaN(num) && num > 0) {
       setAmount(num);
+      if (customAmountDebounce.current) clearTimeout(customAmountDebounce.current);
+      customAmountDebounce.current = setTimeout(() => {
+        sendGAEvent("event", "custom_amount_entered", { amount: num });
+      }, 1000);
     }
     setIsCustom(true);
-  }
+  }, []);
 
   return (
     <section className="py-16 md:py-24 bg-white" id="calculadora">
@@ -240,6 +247,10 @@ export default function RemittanceCalculator() {
                         onClick={() => {
                           setSelectedProviderId(p.id);
                           setDropdownOpen(false);
+                          sendGAEvent("event", "provider_selected", {
+                            provider_name: p.name,
+                            amount,
+                          });
                         }}
                         className={`w-full flex items-center justify-between px-4 py-3 text-left hover:bg-gray-50 transition-colors ${
                           p.id === selectedProviderId ? "bg-gray-100" : ""
