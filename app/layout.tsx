@@ -95,13 +95,13 @@ export default function RootLayout({
       >
         {children}
         <Analytics />
+        {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
+          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
+        )}
+        {process.env.NEXT_PUBLIC_META_PIXEL_ID && (
+          <MetaPixel pixelId={process.env.NEXT_PUBLIC_META_PIXEL_ID} />
+        )}
       </body>
-      {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
-        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
-      )}
-      {process.env.NEXT_PUBLIC_META_PIXEL_ID && (
-        <MetaPixel pixelId={process.env.NEXT_PUBLIC_META_PIXEL_ID} />
-      )}
     </html>
   );
 }
