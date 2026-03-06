@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { sendGAEvent } from "@next/third-parties/google";
 import ContactForm from "./ContactForm";
 
 export default function FAQ() {
@@ -65,7 +66,16 @@ export default function FAQ() {
               className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden"
             >
               <button
-                onClick={() => setOpenIndex(openIndex === index ? null : index)}
+                onClick={() => {
+                  const isOpening = openIndex !== index;
+                  setOpenIndex(openIndex === index ? null : index);
+                  if (isOpening) {
+                    sendGAEvent("event", "faq_item_opened", {
+                      question_index: index,
+                      question_text: faq.question,
+                    });
+                  }
+                }}
                 className="w-full px-6 py-5 text-left flex justify-between items-center hover:bg-gray-50 transition-colors min-h-[44px]"
                 aria-expanded={openIndex === index}
                 aria-controls={`faq-answer-${index}`}
