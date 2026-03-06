@@ -183,7 +183,8 @@ export default function RemittanceCalculator() {
       if (customAmountDebounce.current) clearTimeout(customAmountDebounce.current);
       customAmountDebounce.current = setTimeout(() => {
         sendGAEvent("event", "custom_amount_entered", { amount: num });
-      }, 1000);
+        customAmountDebounce.current = null;
+      }, 500);
     }
     setIsCustom(true);
   }, []);
@@ -294,6 +295,16 @@ export default function RemittanceCalculator() {
                 placeholder="Cantidad personalizada"
                 value={customAmount}
                 onChange={(e) => handleCustomChange(e.target.value)}
+                onBlur={() => {
+                  if (customAmountDebounce.current) {
+                    clearTimeout(customAmountDebounce.current);
+                    customAmountDebounce.current = null;
+                    const num = parseFloat(customAmount);
+                    if (!isNaN(num) && num > 0) {
+                      sendGAEvent("event", "custom_amount_entered", { amount: num });
+                    }
+                  }
+                }}
                 className={`w-full px-4 py-2.5 rounded-lg bg-white text-[#2D3142] placeholder-gray-400 outline-none transition-colors ${
                   isCustom
                     ? "border-2 border-[#2E7D32]"
