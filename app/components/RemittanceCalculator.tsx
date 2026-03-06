@@ -185,6 +185,10 @@ export default function RemittanceCalculator() {
   const selectedRank =
     ranking.findIndex((r) => r.id === selectedProviderId) + 1;
   const cheapest = ranking[0];
+  const cheapestStats = useMemo(
+    () => calcProvider(providers.find((p) => p.id === cheapest.id)!, amount),
+    [cheapest, amount]
+  );
 
   function handlePreset(val: number) {
     setAmount(val);
@@ -500,6 +504,39 @@ export default function RemittanceCalculator() {
                 </p>
               )}
             </div>
+
+            {/* Savings Nudge / Confirmation */}
+            {selectedRank === 1 ? (
+              <div className="rounded-xl bg-green-50 border border-[#2E7D32]/20 p-4">
+                <p className="text-sm text-[#2E7D32] font-medium">
+                  Elegiste la opción más económica para este monto.
+                </p>
+              </div>
+            ) : (
+              <div className="rounded-xl bg-amber-50 border border-[#F57C00]/20 p-4">
+                <p className="text-sm text-gray-700">
+                  Con {cheapest.emoji}{" "}
+                  <span className="font-semibold text-[#2D3142]">{cheapest.name}</span>, tu familia
+                  recibiría{" "}
+                  <span className="font-semibold text-[#2E7D32]">
+                    MXN {formatMXN(cheapestStats.received - stats.received)} más.
+                  </span>
+                </p>
+                <a
+                  href="#newsletter"
+                  onClick={() =>
+                    sendGAEvent("event", "savings_nudge_clicked", {
+                      cheapest_provider: cheapest.name,
+                      amount,
+                      savings_usd: formatUSD(stats.totalCost - cheapestStats.totalCost),
+                    })
+                  }
+                  className="mt-2 inline-block text-sm font-semibold text-[#1565C0] hover:underline"
+                >
+                  Únete a la lista de espera →
+                </a>
+              </div>
+            )}
           </div>
         </div>
 
