@@ -451,21 +451,26 @@ export default function RemittanceCalculator() {
               <p className="text-xs font-medium uppercase tracking-wider text-gray-500 mb-4">
                 ¿Cómo se compara {selectedProvider.name}?
               </p>
-              <div className="flex gap-1 mb-4">
+              <div className="space-y-1.5 mb-4">
                 {ranking.map((r, i) => {
                   const isSelected = r.id === selectedProviderId;
-                  let color = "bg-gray-200";
-                  if (isSelected) {
-                    if (i === 0) color = "bg-[#2E7D32]";
-                    else if (i === ranking.length - 1) color = "bg-[#D32F2F]";
-                    else color = "bg-[#1565C0]";
-                  }
                   return (
                     <div
                       key={r.id}
-                      className={`flex-1 h-3 rounded-full ${color} transition-colors`}
-                      title={`${r.emoji} ${r.name}: $${formatUSD(r.totalCost)}`}
-                    />
+                      className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-colors ${
+                        isSelected
+                          ? "bg-green-50 border border-[#2E7D32]/30"
+                          : "bg-gray-50"
+                      }`}
+                    >
+                      <span className="text-gray-400 w-4 text-right text-xs">{i + 1}</span>
+                      <span className={`flex-1 ${isSelected ? "font-semibold text-[#2D3142]" : "text-gray-600"}`}>
+                        {r.emoji} {r.name}
+                      </span>
+                      <span className={`font-medium tabular-nums ${isSelected ? "text-[#2E7D32]" : "text-gray-500"}`}>
+                        ${formatUSD(r.totalCost)}
+                      </span>
+                    </div>
                   );
                 })}
               </div>
