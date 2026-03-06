@@ -118,6 +118,13 @@ function formatMXN(n: number) {
   });
 }
 
+function getTierHint(providerId: string, amount: number): string | null {
+  if (providerId === "remitly" && amount < 500) return "El costo mejora si envías $500+.";
+  if (providerId === "western-union" && amount < 400) return "El margen mejora si envías $400+.";
+  if (providerId === "ria" && amount < 600) return "El margen mejora si envías $600+.";
+  return null;
+}
+
 function formatUSD(n: number) {
   return n.toLocaleString("en-US", {
     minimumFractionDigits: 2,
@@ -368,6 +375,11 @@ export default function RemittanceCalculator() {
                   {selectedProvider.name}:
                 </span>{" "}
                 {selectedProvider.note}
+                {getTierHint(selectedProvider.id, amount) && (
+                  <span className="ml-1 text-[#1565C0]">
+                    {getTierHint(selectedProvider.id, amount)}
+                  </span>
+                )}
               </p>
             </div>
           </div>
