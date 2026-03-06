@@ -462,34 +462,16 @@ export default function RemittanceCalculator() {
               </p>
             </div>
 
-            {/* Ranking Card */}
-            <div className="rounded-xl bg-white border border-gray-200 p-6 shadow-sm">
-              <p className="text-xs font-medium uppercase tracking-wider text-gray-500 mb-4">
-                ¿Cómo se compara {selectedProvider.name}?
-              </p>
-              <div className="space-y-1.5 mb-4">
-                {ranking.map((r, i) => {
-                  const isSelected = r.id === selectedProviderId;
-                  return (
-                    <div
-                      key={r.id}
-                      className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-colors ${
-                        isSelected
-                          ? "bg-green-50 border border-[#2E7D32]/30"
-                          : "bg-gray-50"
-                      }`}
-                    >
-                      <span className="text-gray-400 w-4 text-right text-xs">{i + 1}</span>
-                      <span className={`flex-1 ${isSelected ? "font-semibold text-[#2D3142]" : "text-gray-600"}`}>
-                        {r.emoji} {r.name}
-                      </span>
-                      <span className={`font-medium tabular-nums ${isSelected ? "text-[#2E7D32]" : "text-gray-500"}`}>
-                        ${formatUSD(r.totalCost)}
-                      </span>
-                    </div>
-                  );
-                })}
-              </div>
+          </div>
+        </div>
+
+        {/* Ranking Section — Full Width */}
+        <div className="mt-8 rounded-xl bg-white border border-gray-200 p-6 shadow-sm">
+          <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-4 gap-2">
+            <p className="text-xs font-medium uppercase tracking-wider text-gray-500">
+              ¿Cómo se compara {selectedProvider.name}?
+            </p>
+            <div className="flex items-baseline gap-2">
               <p
                 className="text-[#2D3142] font-semibold"
                 style={{ fontFamily: 'var(--font-poppins)' }}
@@ -497,59 +479,76 @@ export default function RemittanceCalculator() {
                 #{selectedRank} de 8
               </p>
               {selectedRank === 1 ? (
-                <p className="text-sm text-[#2E7D32] font-medium mt-1">
-                  Esta es la opción más económica para ${amount.toLocaleString()}.
-                </p>
+                <span className="text-sm text-[#2E7D32] font-medium">
+                  — La más económica para ${amount.toLocaleString()}
+                </span>
               ) : (
-                <p className="text-sm text-gray-600 mt-1">
-                  {cheapest.emoji} {cheapest.name} es la más económica — podrías ahorrar{" "}
+                <span className="text-sm text-gray-600">
+                  — Podrías ahorrar{" "}
                   <span className="text-[#2E7D32] font-medium">
-                    $
-                    {formatUSD(
-                      stats.totalCost - calcProvider(
-                        providers.find((p) => p.id === cheapest.id)!,
-                        amount
-                      ).totalCost
-                    )}
+                    ${formatUSD(stats.totalCost - cheapestStats.totalCost)}
                   </span>{" "}
-                  cambiando de proveedor.
-                </p>
+                  con {cheapest.emoji} {cheapest.name}
+                </span>
               )}
             </div>
-
-            {/* Savings Nudge / Confirmation */}
-            {selectedRank === 1 ? (
-              <div className="rounded-xl bg-green-50 border border-[#2E7D32]/20 p-4">
-                <p className="text-sm text-[#2E7D32] font-medium">
-                  Elegiste la opción más económica para este monto.
-                </p>
-              </div>
-            ) : (
-              <div className="rounded-xl bg-amber-50 border border-[#F57C00]/20 p-4">
-                <p className="text-sm text-gray-700">
-                  Con {cheapest.emoji}{" "}
-                  <span className="font-semibold text-[#2D3142]">{cheapest.name}</span>, tu familia
-                  recibiría{" "}
-                  <span className="font-semibold text-[#2E7D32]">
-                    MXN {formatMXN(cheapestStats.received - stats.received)} más.
-                  </span>
-                </p>
-                <a
-                  href="#newsletter"
-                  onClick={() =>
-                    sendGAEvent("event", "savings_nudge_clicked", {
-                      cheapest_provider: cheapest.name,
-                      amount,
-                      savings_usd: formatUSD(stats.totalCost - cheapestStats.totalCost),
-                    })
-                  }
-                  className="mt-2 inline-block text-sm font-semibold text-[#1565C0] hover:underline"
-                >
-                  Únete a la lista de espera →
-                </a>
-              </div>
-            )}
           </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+            {ranking.map((r, i) => {
+              const isSelected = r.id === selectedProviderId;
+              return (
+                <div
+                  key={r.id}
+                  className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-colors ${
+                    isSelected
+                      ? "bg-green-50 border border-[#2E7D32]/30"
+                      : "bg-gray-50"
+                  }`}
+                >
+                  <span className="text-gray-400 w-4 text-right text-xs">{i + 1}</span>
+                  <span className={`flex-1 ${isSelected ? "font-semibold text-[#2D3142]" : "text-gray-600"}`}>
+                    {r.emoji} {r.name}
+                  </span>
+                  <span className={`font-medium tabular-nums ${isSelected ? "text-[#2E7D32]" : "text-gray-500"}`}>
+                    ${formatUSD(r.totalCost)}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Savings Nudge / Confirmation */}
+          {selectedRank === 1 ? (
+            <div className="mt-4 rounded-lg bg-green-50 border border-[#2E7D32]/20 p-3">
+              <p className="text-sm text-[#2E7D32] font-medium">
+                Elegiste la opción más económica para este monto.
+              </p>
+            </div>
+          ) : (
+            <div className="mt-4 rounded-lg bg-amber-50 border border-[#F57C00]/20 p-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+              <p className="text-sm text-gray-700">
+                Con {cheapest.emoji}{" "}
+                <span className="font-semibold text-[#2D3142]">{cheapest.name}</span>, tu familia
+                recibiría{" "}
+                <span className="font-semibold text-[#2E7D32]">
+                  MXN {formatMXN(cheapestStats.received - stats.received)} más.
+                </span>
+              </p>
+              <a
+                href="#newsletter"
+                onClick={() =>
+                  sendGAEvent("event", "savings_nudge_clicked", {
+                    cheapest_provider: cheapest.name,
+                    amount,
+                    savings_usd: formatUSD(stats.totalCost - cheapestStats.totalCost),
+                  })
+                }
+                className="text-sm font-semibold text-[#1565C0] hover:underline whitespace-nowrap"
+              >
+                Únete a la lista de espera →
+              </a>
+            </div>
+          )}
         </div>
 
         {/* Disclaimer */}
