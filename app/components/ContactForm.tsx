@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { sendGAEvent } from "@next/third-parties/google";
 
 export default function ContactForm() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
@@ -26,6 +27,7 @@ export default function ContactForm() {
 
       setStatus("success");
       setForm({ name: "", email: "", message: "" });
+      sendGAEvent("event", "contact_form_submitted");
     } catch (err) {
       setStatus("error");
       setErrorMsg(err instanceof Error ? err.message : "Error al enviar el mensaje");
