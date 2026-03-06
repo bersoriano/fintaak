@@ -133,6 +133,7 @@ export default function RemittanceCalculator() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const customAmountDebounce = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const hasTrackedView = useRef(false);
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -145,6 +146,23 @@ export default function RemittanceCalculator() {
     }
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  useEffect(() => {
+    const section = document.getElementById("calculadora");
+    if (!section) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !hasTrackedView.current) {
+          hasTrackedView.current = true;
+          sendGAEvent("event", "calculator_section_viewed");
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.3 }
+    );
+    observer.observe(section);
+    return () => observer.disconnect();
   }, []);
 
   const selectedProvider = providers.find((p) => p.id === selectedProviderId)!;
