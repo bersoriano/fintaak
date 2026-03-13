@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { sendGAEvent } from "@next/third-parties/google";
 
 export default function Hero() {
   return (
@@ -35,12 +38,14 @@ export default function Hero() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <Link
                 href="#newsletter"
+                onClick={() => sendGAEvent("event", "hero_cta_clicked", { button: "waitlist" })}
                 className="bg-[#2E7D32] text-white px-8 py-4 rounded-lg hover:bg-green-800 transition-colors text-base font-semibold min-h-[44px] flex items-center justify-center shadow-lg"
               >
                 Únete a la Lista de Espera
               </Link>
               <Link
                 href="#calculadora"
+                onClick={() => sendGAEvent("event", "hero_cta_clicked", { button: "calculator" })}
                 className="border-2 border-[#2E7D32] text-[#2E7D32] px-8 py-4 rounded-lg hover:bg-green-50 transition-colors text-base font-semibold min-h-[44px] flex items-center justify-center"
               >
                 Prueba la Calculadora

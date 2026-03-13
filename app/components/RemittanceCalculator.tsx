@@ -118,6 +118,13 @@ function formatMXN(n: number) {
   });
 }
 
+function getTierHint(providerId: string, amount: number): string | null {
+  if (providerId === "remitly" && amount < 500) return "El costo mejora si envías $500+.";
+  if (providerId === "western-union" && amount < 400) return "El margen mejora si envías $400+.";
+  if (providerId === "ria" && amount < 600) return "El margen mejora si envías $600+.";
+  return null;
+}
+
 function formatUSD(n: number) {
   return n.toLocaleString("en-US", {
     minimumFractionDigits: 2,
@@ -133,6 +140,7 @@ export default function RemittanceCalculator() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const customAmountDebounce = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const hasTrackedView = useRef(false);
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -145,6 +153,23 @@ export default function RemittanceCalculator() {
     }
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  useEffect(() => {
+    const section = document.getElementById("calculadora");
+    if (!section) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !hasTrackedView.current) {
+          hasTrackedView.current = true;
+          sendGAEvent("event", "calculator_section_viewed");
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.3 }
+    );
+    observer.observe(section);
+    return () => observer.disconnect();
   }, []);
 
   const selectedProvider = providers.find((p) => p.id === selectedProviderId)!;
@@ -167,6 +192,10 @@ export default function RemittanceCalculator() {
   const selectedRank =
     ranking.findIndex((r) => r.id === selectedProviderId) + 1;
   const cheapest = ranking[0];
+  const cheapestStats = useMemo(
+    () => calcProvider(providers.find((p) => p.id === cheapest.id)!, amount),
+    [cheapest, amount]
+  );
 
   function handlePreset(val: number) {
     setAmount(val);
@@ -183,7 +212,8 @@ export default function RemittanceCalculator() {
       if (customAmountDebounce.current) clearTimeout(customAmountDebounce.current);
       customAmountDebounce.current = setTimeout(() => {
         sendGAEvent("event", "custom_amount_entered", { amount: num });
-      }, 1000);
+        customAmountDebounce.current = null;
+      }, 500);
     }
     setIsCustom(true);
   }, []);
@@ -294,6 +324,16 @@ export default function RemittanceCalculator() {
                 placeholder="Cantidad personalizada"
                 value={customAmount}
                 onChange={(e) => handleCustomChange(e.target.value)}
+                onBlur={() => {
+                  if (customAmountDebounce.current) {
+                    clearTimeout(customAmountDebounce.current);
+                    customAmountDebounce.current = null;
+                    const num = parseFloat(customAmount);
+                    if (!isNaN(num) && num > 0) {
+                      sendGAEvent("event", "custom_amount_entered", { amount: num });
+                    }
+                  }
+                }}
                 className={`w-full px-4 py-2.5 rounded-lg bg-white text-[#2D3142] placeholder-gray-400 outline-none transition-colors ${
                   isCustom
                     ? "border-2 border-[#2E7D32]"
@@ -335,6 +375,11 @@ export default function RemittanceCalculator() {
                   {selectedProvider.name}:
                 </span>{" "}
                 {selectedProvider.note}
+                {getTierHint(selectedProvider.id, amount) && (
+                  <span className="ml-1 text-[#1565C0]">
+                    {getTierHint(selectedProvider.id, amount)}
+                  </span>
+                )}
               </p>
             </div>
           </div>
@@ -417,29 +462,16 @@ export default function RemittanceCalculator() {
               </p>
             </div>
 
-            {/* Ranking Card */}
-            <div className="rounded-xl bg-white border border-gray-200 p-6 shadow-sm">
-              <p className="text-xs font-medium uppercase tracking-wider text-gray-500 mb-4">
-                ¿Cómo se compara {selectedProvider.name}?
-              </p>
-              <div className="flex gap-1 mb-4">
-                {ranking.map((r, i) => {
-                  const isSelected = r.id === selectedProviderId;
-                  let color = "bg-gray-200";
-                  if (isSelected) {
-                    if (i === 0) color = "bg-[#2E7D32]";
-                    else if (i === ranking.length - 1) color = "bg-[#D32F2F]";
-                    else color = "bg-[#1565C0]";
-                  }
-                  return (
-                    <div
-                      key={r.id}
-                      className={`flex-1 h-3 rounded-full ${color} transition-colors`}
-                      title={`${r.emoji} ${r.name}: $${formatUSD(r.totalCost)}`}
-                    />
-                  );
-                })}
-              </div>
+          </div>
+        </div>
+
+        {/* Ranking Section — Full Width */}
+        <div className="mt-8 rounded-xl bg-white border border-gray-200 p-6 shadow-sm">
+          <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-4 gap-2">
+            <p className="text-xs font-medium uppercase tracking-wider text-gray-500">
+              ¿Cómo se compara {selectedProvider.name}?
+            </p>
+            <div className="flex items-baseline gap-2">
               <p
                 className="text-[#2D3142] font-semibold"
                 style={{ fontFamily: 'var(--font-poppins)' }}
@@ -447,26 +479,76 @@ export default function RemittanceCalculator() {
                 #{selectedRank} de 8
               </p>
               {selectedRank === 1 ? (
-                <p className="text-sm text-[#2E7D32] font-medium mt-1">
-                  Esta es la opción más económica para ${amount.toLocaleString()}.
-                </p>
+                <span className="text-sm text-[#2E7D32] font-medium">
+                  — La más económica para ${amount.toLocaleString()}
+                </span>
               ) : (
-                <p className="text-sm text-gray-600 mt-1">
-                  {cheapest.emoji} {cheapest.name} es la más económica — podrías ahorrar{" "}
+                <span className="text-sm text-gray-600">
+                  — Podrías ahorrar{" "}
                   <span className="text-[#2E7D32] font-medium">
-                    $
-                    {formatUSD(
-                      stats.totalCost - calcProvider(
-                        providers.find((p) => p.id === cheapest.id)!,
-                        amount
-                      ).totalCost
-                    )}
+                    ${formatUSD(stats.totalCost - cheapestStats.totalCost)}
                   </span>{" "}
-                  cambiando de proveedor.
-                </p>
+                  con {cheapest.emoji} {cheapest.name}
+                </span>
               )}
             </div>
           </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+            {ranking.map((r, i) => {
+              const isSelected = r.id === selectedProviderId;
+              return (
+                <div
+                  key={r.id}
+                  className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-colors ${
+                    isSelected
+                      ? "bg-green-50 border border-[#2E7D32]/30"
+                      : "bg-gray-50"
+                  }`}
+                >
+                  <span className="text-gray-400 w-4 text-right text-xs">{i + 1}</span>
+                  <span className={`flex-1 ${isSelected ? "font-semibold text-[#2D3142]" : "text-gray-600"}`}>
+                    {r.emoji} {r.name}
+                  </span>
+                  <span className={`font-medium tabular-nums ${isSelected ? "text-[#2E7D32]" : "text-gray-500"}`}>
+                    ${formatUSD(r.totalCost)}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Savings Nudge / Confirmation */}
+          {selectedRank === 1 ? (
+            <div className="mt-4 rounded-lg bg-green-50 border border-[#2E7D32]/20 p-3">
+              <p className="text-sm text-[#2E7D32] font-medium">
+                Elegiste la opción más económica para este monto.
+              </p>
+            </div>
+          ) : (
+            <div className="mt-4 rounded-lg bg-amber-50 border border-[#F57C00]/20 p-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+              <p className="text-sm text-gray-700">
+                Con {cheapest.emoji}{" "}
+                <span className="font-semibold text-[#2D3142]">{cheapest.name}</span>, tu familia
+                recibiría{" "}
+                <span className="font-semibold text-[#2E7D32]">
+                  MXN {formatMXN(cheapestStats.received - stats.received)} más.
+                </span>
+              </p>
+              <a
+                href="#newsletter"
+                onClick={() =>
+                  sendGAEvent("event", "savings_nudge_clicked", {
+                    cheapest_provider: cheapest.name,
+                    amount,
+                    savings_usd: formatUSD(stats.totalCost - cheapestStats.totalCost),
+                  })
+                }
+                className="text-sm font-semibold text-[#1565C0] hover:underline whitespace-nowrap"
+              >
+                Únete a la lista de espera →
+              </a>
+            </div>
+          )}
         </div>
 
         {/* Disclaimer */}

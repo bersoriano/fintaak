@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { sendGAEvent } from "@next/third-parties/google";
 
 export default function CTASection() {
   const [email, setEmail] = useState("");
@@ -28,6 +29,7 @@ export default function CTASection() {
     }
 
     setIsLoading(true);
+    sendGAEvent("event", "newsletter_signup_attempted");
 
     try {
       const res = await fetch("/api/newsletter/subscribe", {
@@ -44,10 +46,11 @@ export default function CTASection() {
 
       setSubmitted(true);
       setEmail("");
+      sendGAEvent("event", "newsletter_signup_success");
     } catch (err) {
-      setError(
-        err instanceof Error ? err.message : "Error al suscribirte. Intenta de nuevo."
-      );
+      const message = err instanceof Error ? err.message : "Error al suscribirte. Intenta de nuevo.";
+      setError(message);
+      sendGAEvent("event", "newsletter_signup_error", { error: message });
     } finally {
       setIsLoading(false);
     }
