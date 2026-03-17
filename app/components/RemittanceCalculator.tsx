@@ -21,7 +21,7 @@ const providers: Provider[] = [
     emoji: "⚡",
     getFixedFee: () => 0,
     getMarkupPct: () => 0.75,
-    note: "Sin comisión fija, margen bajo — generalmente la opción más económica.",
+    note: "Sin comisión fija y con una diferencia baja en el tipo de cambio.",
   },
   {
     id: "paysend",
@@ -42,7 +42,7 @@ const providers: Provider[] = [
       return 7.99;
     },
     getMarkupPct: () => 0.55,
-    note: "Comisiones fijas más altas pero margen cambiario muy bajo. La comisión puede variar los fines de semana.",
+    note: "Comisiones más altas, pero con poca diferencia en el tipo de cambio. La comisión puede variar los fines de semana.",
   },
   {
     id: "western-union",
@@ -50,7 +50,7 @@ const providers: Provider[] = [
     emoji: "🟡",
     getFixedFee: () => 1.99,
     getMarkupPct: (amount) => (amount < 400 ? 1.85 : 1.15),
-    note: "El margen cambiario mejora significativamente a partir de $400+.",
+    note: "La diferencia en el tipo de cambio mejora significativamente a partir de $400+.",
   },
   {
     id: "ria",
@@ -58,7 +58,7 @@ const providers: Provider[] = [
     emoji: "🟢",
     getFixedFee: () => 1.99,
     getMarkupPct: (amount) => (amount < 600 ? 1.2 : 1.1),
-    note: "El margen cambiario mejora ligeramente a partir de $600+.",
+    note: "La diferencia en el tipo de cambio mejora ligeramente a partir de $600+.",
   },
   {
     id: "felix-pago",
@@ -66,7 +66,7 @@ const providers: Provider[] = [
     emoji: "🦊",
     getFixedFee: () => 2.99,
     getMarkupPct: () => 1.7,
-    note: "Comisión fija más alta con margen moderado.",
+    note: "Comisión fija más alta y una diferencia moderada en el tipo de cambio.",
   },
   {
     id: "remitly",
@@ -74,7 +74,7 @@ const providers: Provider[] = [
     emoji: "📲",
     getFixedFee: () => 1.99,
     getMarkupPct: (amount) => (amount < 500 ? 3.88 : 1.45),
-    note: "Margen muy alto por debajo de $500. Mejora considerablemente a partir de $500+.",
+    note: "La diferencia en el tipo de cambio es alta por debajo de $500. Mejora considerablemente a partir de $500+.",
   },
   {
     id: "worldremit",
@@ -82,7 +82,7 @@ const providers: Provider[] = [
     emoji: "🌍",
     getFixedFee: () => 1.99,
     getMarkupPct: () => 2.3,
-    note: "Margen cambiario consistentemente alto sin importar el monto enviado.",
+    note: "La diferencia en el tipo de cambio es alta sin importar el monto enviado.",
   },
 ];
 
@@ -120,8 +120,8 @@ function formatMXN(n: number) {
 
 function getTierHint(providerId: string, amount: number): string | null {
   if (providerId === "remitly" && amount < 500) return "El costo mejora si envías $500+.";
-  if (providerId === "western-union" && amount < 400) return "El margen mejora si envías $400+.";
-  if (providerId === "ria" && amount < 600) return "El margen mejora si envías $600+.";
+  if (providerId === "western-union" && amount < 400) return "El tipo de cambio mejora si envías $400+.";
+  if (providerId === "ria" && amount < 600) return "El tipo de cambio mejora si envías $600+.";
   return null;
 }
 
@@ -223,14 +223,11 @@ export default function RemittanceCalculator() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
-          <span className="text-xs font-semibold uppercase tracking-widest text-[#2E7D32]">
-            Herramienta de Transparencia
-          </span>
           <h2
-            className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#2D3142] mt-2"
+            className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#2D3142]"
             style={{ fontFamily: 'var(--font-poppins)' }}
           >
-            Calculadora de Costos de Remesas
+            Calculadora: ¿Cuánto recibe tu familia?
           </h2>
           <p className="text-lg text-gray-600 mt-2">
             USD → MXN · Transferencia Bancaria · Datos de Ene 2026
@@ -359,29 +356,14 @@ export default function RemittanceCalculator() {
                 </span>
               </div>
               <p className="text-sm text-gray-500 mt-3">
-                Sin comisiones ni markup recibirían MXN{" "}
+                Sin comisión ni diferencia en el tipo de cambio recibirían MXN{" "}
                 {formatMXN(stats.idealReceived)}
               </p>
               <p className="text-sm text-[#F57C00] font-medium mt-1">
-                MXN {formatMXN(stats.lostMXN)} menos por comisiones y markup
+                MXN {formatMXN(stats.lostMXN)} menos por comisión y tipo de cambio
               </p>
             </div>
 
-            {/* Provider Note */}
-            <div className="rounded-xl bg-white border border-gray-200 p-5 shadow-sm">
-              <p className="text-sm text-gray-600">
-                <span className="mr-2">💡</span>
-                <span className="font-medium text-[#2D3142]">
-                  {selectedProvider.name}:
-                </span>{" "}
-                {selectedProvider.note}
-                {getTierHint(selectedProvider.id, amount) && (
-                  <span className="ml-1 text-[#1565C0]">
-                    {getTierHint(selectedProvider.id, amount)}
-                  </span>
-                )}
-              </p>
-            </div>
           </div>
 
           {/* RIGHT COLUMN — Breakdown & Analysis */}
@@ -406,26 +388,20 @@ export default function RemittanceCalculator() {
               </div>
               <div className="space-y-3">
                 <div className="flex justify-between text-sm">
-                  <span className="text-gray-600">Comisión Fija</span>
+                  <span className="text-gray-600">Comisión</span>
                   <span className="text-[#2D3142] font-medium">
                     ${formatUSD(stats.fixedFee)}
                   </span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <div>
-                    <span className="text-[#F57C00] font-medium">Costo Oculto FX</span>
+                    <span className="text-[#F57C00] font-medium">Margen por tipo de cambio</span>
                     <span className="text-gray-400 text-xs ml-1">
-                      ({stats.markupPct}% markup × ${amount.toLocaleString()})
+                      ({stats.markupPct}% sobre ${amount.toLocaleString()})
                     </span>
                   </div>
                   <span className="text-[#F57C00] font-medium">
                     ${formatUSD(stats.hiddenFxCost)}
-                  </span>
-                </div>
-                <div className="flex justify-between text-sm">
-                  <span className="text-gray-600">Markup FX</span>
-                  <span className="text-[#2D3142] font-medium">
-                    {stats.markupPct.toFixed(2)}%
                   </span>
                 </div>
               </div>
@@ -436,7 +412,7 @@ export default function RemittanceCalculator() {
               <div className="grid grid-cols-2 gap-4 mb-4">
                 <div className="rounded-lg bg-gray-50 p-4">
                   <p className="text-[10px] font-medium uppercase tracking-wider text-gray-500 mb-1">
-                    Tasa del Proveedor
+                    Tasa de {selectedProvider.name}
                   </p>
                   <p
                     className="text-xl font-bold text-[#2D3142]"
@@ -458,7 +434,7 @@ export default function RemittanceCalculator() {
                 </div>
               </div>
               <p className="text-xs text-gray-500 leading-relaxed">
-                La tasa mid-market es el tipo de cambio real que ves en Google o XE. Los proveedores ganan ofreciendo una tasa peor — la diferencia es el markup oculto.
+                La tasa mid-market es el tipo de cambio real que ves en Google o XE. Los proveedores aplican un tipo de cambio menos favorable; esa diferencia es el margen del tipo de cambio.
               </p>
             </div>
 
@@ -478,11 +454,7 @@ export default function RemittanceCalculator() {
               >
                 #{selectedRank} de 8
               </p>
-              {selectedRank === 1 ? (
-                <span className="text-sm text-[#2E7D32] font-medium">
-                  — La más económica para ${amount.toLocaleString()}
-                </span>
-              ) : (
+              {selectedRank !== 1 && (
                 <span className="text-sm text-gray-600">
                   — Podrías ahorrar{" "}
                   <span className="text-[#2E7D32] font-medium">
@@ -495,21 +467,16 @@ export default function RemittanceCalculator() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
             {ranking.map((r, i) => {
-              const isSelected = r.id === selectedProviderId;
               return (
                 <div
                   key={r.id}
-                  className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-colors ${
-                    isSelected
-                      ? "bg-green-50 border border-[#2E7D32]/30"
-                      : "bg-gray-50"
-                  }`}
+                  className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm bg-gray-50 transition-colors"
                 >
                   <span className="text-gray-400 w-4 text-right text-xs">{i + 1}</span>
-                  <span className={`flex-1 ${isSelected ? "font-semibold text-[#2D3142]" : "text-gray-600"}`}>
+                  <span className="flex-1 text-gray-600">
                     {r.emoji} {r.name}
                   </span>
-                  <span className={`font-medium tabular-nums ${isSelected ? "text-[#2E7D32]" : "text-gray-500"}`}>
+                  <span className="font-medium tabular-nums text-gray-500">
                     ${formatUSD(r.totalCost)}
                   </span>
                 </div>
@@ -517,38 +484,32 @@ export default function RemittanceCalculator() {
             })}
           </div>
 
-          {/* Savings Nudge / Confirmation */}
-          {selectedRank === 1 ? (
-            <div className="mt-4 rounded-lg bg-green-50 border border-[#2E7D32]/20 p-3">
-              <p className="text-sm text-[#2E7D32] font-medium">
-                Elegiste la opción más económica para este monto.
-              </p>
-            </div>
-          ) : (
-            <div className="mt-4 rounded-lg bg-amber-50 border border-[#F57C00]/20 p-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-              <p className="text-sm text-gray-700">
-                Con {cheapest.emoji}{" "}
-                <span className="font-semibold text-[#2D3142]">{cheapest.name}</span>, tu familia
-                recibiría{" "}
-                <span className="font-semibold text-[#2E7D32]">
-                  MXN {formatMXN(cheapestStats.received - stats.received)} más.
-                </span>
-              </p>
-              <a
-                href="#newsletter"
-                onClick={() =>
-                  sendGAEvent("event", "savings_nudge_clicked", {
-                    cheapest_provider: cheapest.name,
-                    amount,
-                    savings_usd: formatUSD(stats.totalCost - cheapestStats.totalCost),
-                  })
-                }
-                className="text-sm font-semibold text-[#1565C0] hover:underline whitespace-nowrap"
-              >
-                Únete a la lista de espera →
-              </a>
-            </div>
-          )}
+          {/* Savings Nudge */}
+          <div className="mt-4 rounded-lg bg-amber-50 border border-[#F57C00]/20 p-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+            <p className="text-sm text-gray-700">
+              <span className="font-medium text-[#2D3142]">
+                💡 Hay opciones más económicas para este envío
+              </span>{" "}
+              — podrías ahorrar{" "}
+              <span className="font-semibold text-[#2E7D32]">
+                ${formatUSD(stats.totalCost - cheapestStats.totalCost)}
+              </span>{" "}
+              cambiando de proveedor.
+            </p>
+            <a
+              href="#newsletter"
+              onClick={() =>
+                sendGAEvent("event", "savings_nudge_clicked", {
+                  cheapest_provider: cheapest.name,
+                  amount,
+                  savings_usd: formatUSD(stats.totalCost - cheapestStats.totalCost),
+                })
+              }
+              className="text-sm font-semibold text-[#1565C0] hover:underline whitespace-nowrap"
+            >
+              Únete a la lista de espera →
+            </a>
+          </div>
         </div>
 
         {/* Disclaimer */}
