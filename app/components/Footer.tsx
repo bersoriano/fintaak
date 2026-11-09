@@ -192,6 +192,12 @@ export default function Footer() {
             <p className="text-gray-400 text-sm text-center md:text-left">
               © {new Date().getFullYear()} Fintaak. Todos los derechos reservados.
             </p>
+            <p className="text-gray-400 text-sm">
+              Developed by{" "}
+              <a href="https://brilliant.dev/" className="hover:text-white transition-colors">
+                brilliant.dev
+              </a>
+            </p>
             <div className="flex gap-6 text-sm">
               <Link href="/legal/terminos" className="text-gray-400 hover:text-white transition-colors">
                 Términos
